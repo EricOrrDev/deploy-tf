@@ -1,0 +1,108 @@
+@page "/"
+@inject IFileSystem FileSystem
+
+<div class="hero-section">
+    <div class="hero-badge">Modern TF2 Config Generator</div>
+    <h1 class="hero-title">Welcome to Deploy<span class="text-orange">.TF</span></h1>
+    <p class="hero-subtitle">
+        Seamlessly build, deploy, customize, and maintain your Team Fortress 2 configs with one-click deployment and versioned history.
+    </p>
+</div>
+
+<div class="dashboard-grid">
+    <div class="card status-card">
+        <div class="card-header">
+            <h3>🖥️ Host Environment</h3>
+            <span class="pill-badge @(FileSystem.CanDeployDirectly ? "pill-desktop" : "pill-web")">
+                @(FileSystem.CanDeployDirectly ? "Native Desktop" : "Web Client")
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="stat-row">
+                <span class="stat-label">Platform:</span>
+                <span class="stat-value highlight">@FileSystem.PlatformName</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Direct TF2 Deployment:</span>
+                <span class="stat-value">
+                    @(FileSystem.CanDeployDirectly ? "✅ Enabled (Zero zip extraction)" : "📦 Archive Download Mode")
+                </span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Target TF2 Path:</span>
+                <span class="stat-value text-mono">@defaultPath</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card interactive-card">
+        <div class="card-header">
+            <h3>⚡ Interactivity &amp; Engine Check</h3>
+            <span class="pill-badge pill-ok">Online</span>
+        </div>
+        <div class="card-body">
+            <p>Verify Blazor two-way event binding and dynamic state evaluation:</p>
+            <div class="counter-box">
+                <span class="counter-display">Test Clicks: <strong>@counter</strong></span>
+                <button class="btn btn-primary" @onclick="IncrementCounter">
+                    Click to Verify Event Dispatch
+                </button>
+            </div>
+            @if (counter > 0)
+            {
+                <div class="alert alert-success">
+                    ✨ Blazor event handling is functioning seamlessly on @FileSystem.PlatformName!
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="features-section">
+    <h2 class="section-title">Core Pillars of Deploy.TF</h2>
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="feature-icon">🚀</div>
+            <div class="feature-details">
+                <h4>One-Click Deployment</h4>
+                <p>No more manual zip downloading or extracting to <code>tf/cfg</code>. Instant swap with automatic archiving of previous configs.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">📜</div>
+            <div class="feature-details">
+                <h4>Config History</h4>
+                <p>Git-like historical tracking with timeline checkpoints. Roll back breaking changes or inspect iterative diffs.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">☁️</div>
+            <div class="feature-details">
+                <h4>Cloud Backup</h4>
+                <p>Google Drive synchronization to secure your personal configs, binds, and crosshairs across machines.</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <div class="feature-icon">📁</div>
+            <div class="feature-details">
+                <h4>Path Ready</h4>
+                <p>Automatic detection of Steam TF2 installations for true zero-friction setup and deployment.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int counter = 0;
+    private string defaultPath = "Detecting...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        defaultPath = await FileSystem.GetDefaultTf2PathAsync();
+    }
+
+    private void IncrementCounter()
+    {
+        counter++;
+    }
+}

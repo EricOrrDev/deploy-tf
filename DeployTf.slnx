@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DeployTf.Core/DeployTf.Core.csproj" />
+    <Project Path="src/DeployTf.Desktop/DeployTf.Desktop.csproj" />
+    <Project Path="src/DeployTf.Web/DeployTf.Web.csproj" />
+  </Folder>
+</Solution>

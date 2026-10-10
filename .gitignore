@@ -2,3 +2,13 @@ _site
 .sass-cache
 .jekyll-metadata
 Gemfile.lock
+
+# .NET Build and IDE artifacts
+bin/
+obj/
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+Deploy-tf/

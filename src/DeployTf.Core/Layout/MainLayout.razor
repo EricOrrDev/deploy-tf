@@ -1,0 +1,31 @@
+@inherits LayoutComponentBase
+
+<div class="app-layout">
+    <header class="app-header">
+        <div class="brand">
+            <span class="brand-logo">⚔️</span>
+            <span class="brand-name">DEPLOY<span class="brand-accent">.TF</span></span>
+        </div>
+        <nav class="app-nav">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">Overview</NavLink>
+            <NavLink class="nav-link" href="config">Config Generator</NavLink>
+            <NavLink class="nav-link" href="about">About</NavLink>
+        </nav>
+        <div class="header-status">
+            <span class="badge-status">v0.1.0-alpha</span>
+        </div>
+    </header>
+
+    <main class="app-main">
+        <div class="content-container">
+            @Body
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-content">
+            <span>Deploy.TF &bull; Modern Team Fortress 2 Configuration Suite</span>
+            <span class="footer-sub">Built with .NET &amp; Photino Blazor</span>
+        </div>
+    </footer>
+</div>
